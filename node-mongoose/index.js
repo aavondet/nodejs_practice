@@ -8,13 +8,11 @@ const connect = mongoose.connect(url);
 connect.then((db) => {
     console.log('Connected to the server!');
 
-    var newUser = Users({
+    Users.create({
         name : 'Bob',
         pass : 'Bobby123',
         score : 2
-    });
-
-    newUser.save()
+    })
     .then((user) => {
         console.log(user);
         return Users.find({}).exec();
