@@ -15,11 +15,18 @@ connect.then((db) => {
     })
     .then((user) => {
         console.log(user);
-        return Users.find({}).exec();
+        return Users.findById(user._id).exec();
     })
-    .then((dishes) => {
-        console.log(dishes);
-        return Users.remove({});
+    .then((user) => {
+        user.games.push({
+            opponent : 'Joe',
+            win : true
+        });
+        return user.save();
+    })
+    .then((user) => {
+        console.log(user);
+        return user.remove({});
     })
     .then(() => {
         return mongoose.connection.close();
